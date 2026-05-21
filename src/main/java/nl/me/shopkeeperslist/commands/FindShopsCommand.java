@@ -38,7 +38,7 @@ public class FindShopsCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         if (args.length < 2) {
-            MessageUtils.onWrongUsage(commandSender, "/findshops <selling/buying/player> <item/player>");
+            MessageUtils.onWrongUsage(commandSender, "/findshops <selling/buying/player> <item/player> (instock)");
             return true;
         }
         if (args[0].equalsIgnoreCase("selling")) {
@@ -60,7 +60,7 @@ public class FindShopsCommand implements CommandExecutor, TabCompleter {
         } else if (args[0].equalsIgnoreCase("player")) {
             ShopDisplayUtils.displayShopkeepersForPlayerForPage(commandSender, args[1], 1);
         } else {
-            MessageUtils.onWrongUsage(commandSender, "/findshops <selling/buying/player> <item/player>");
+            MessageUtils.onWrongUsage(commandSender, "/findshops <selling/buying/player> <item/player> (instock)");
         }
         return true;
     }
