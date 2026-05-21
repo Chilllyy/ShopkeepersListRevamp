@@ -1,5 +1,5 @@
 name: ShopkeepersList
-version: '1.52'
+version: '1.54'
 authors: [0nys, Chilly_Willy]
 main: nl.me.shopkeeperslist.ShopkeepersList
 api-version: '1.20'
