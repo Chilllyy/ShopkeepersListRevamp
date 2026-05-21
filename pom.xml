@@ -6,7 +6,7 @@
 
     <groupId>nl.me</groupId>
     <artifactId>ShopkeepersList</artifactId>
-    <version>1.53</version>
+    <version>1.54</version>
     <packaging>jar</packaging>
 
     <name>ShopkeepersList</name>
