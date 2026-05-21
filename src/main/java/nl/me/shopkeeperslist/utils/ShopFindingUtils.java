@@ -31,12 +31,16 @@ public class ShopFindingUtils {
      * @param item The item to find shops selling.
      * @return A list of shops selling the given item.
      */
-    public static List<Shopkeeper> findShopsSelling(String item) {
+    public static List<Shopkeeper> findShopsSelling(String item, boolean instock) {
         List<Shopkeeper> shops = new ArrayList<>();
         ShopkeepersAPI.getShopkeeperRegistry().getAllShopkeepers().forEach(shopkeeper -> {
             shopkeeper.getTradingRecipes(null).forEach(tradingRecipe -> {
                 if (matchesItemOrEnchant(tradingRecipe.getResultItem(), item)) {
-                    shops.add(shopkeeper);
+                    if (instock && !tradingRecipe.isOutOfStock()) {
+                        shops.add(shopkeeper);
+                    } else if (!instock) {
+                        shops.add(shopkeeper);
+                    }
                 }
             });
         });
@@ -48,12 +52,16 @@ public class ShopFindingUtils {
      * @param item The item to find shops buying.
      * @return A list of shops buying the given item.
      */
-    public static List<Shopkeeper> findShopsBuying(String item) {
+    public static List<Shopkeeper> findShopsBuying(String item, boolean instock) {
         List<Shopkeeper> shops = new ArrayList<>();
         ShopkeepersAPI.getShopkeeperRegistry().getAllShopkeepers().forEach(shopkeeper -> {
             shopkeeper.getTradingRecipes(null).forEach(tradingRecipe -> {
                 if (matchesItemOrEnchant(tradingRecipe.getItem1(), item) || matchesItemOrEnchant(tradingRecipe.getItem2(), item)) {
-                    shops.add(shopkeeper);
+                    if (instock && !tradingRecipe.isOutOfStock()) {
+                        shops.add(shopkeeper);
+                    } else if (!instock) {
+                        shops.add(shopkeeper);
+                    }
                 }
             });
         });

@@ -9,11 +9,13 @@ public class ShopInventoryHolder implements InventoryHolder {
     private final ShopGUIType TYPE;
     private final String VALUE;
     private int page;
+    private boolean inStock;
 
-    public ShopInventoryHolder(ShopGUIType type, String value, int page) {
+    public ShopInventoryHolder(ShopGUIType type, String value, int page, boolean instock) {
         this.TYPE = type;
         this.VALUE = value;
         this.page = page;
+        this.inStock = instock;
     }
 
     public ShopGUIType getTYPE() {
@@ -31,6 +33,8 @@ public class ShopInventoryHolder implements InventoryHolder {
     public void setPage(int page) {
         this.page = page;
     }
+
+    public boolean getInStock() { return inStock; }
 
     @Override
     public Inventory getInventory() {

@@ -81,13 +81,14 @@ public class InventoryClickListener implements Listener {
     private static void navigateToNewPage(Player player, ShopInventoryHolder holder, int page) {
         ShopGUIType type = holder.getTYPE();
         String value = holder.getVALUE();
+        boolean instock = holder.getInStock();
 
         switch (type) {
             case SELLING_ITEM:
-                ShopDisplayUtils.displayShopkeepersForSellingItemForPage(player, value, page);
+                ShopDisplayUtils.displayShopkeepersForSellingItemForPage(player, value, page, instock);
                 break;
             case BUYING_ITEM:
-                ShopDisplayUtils.displayShopkeepersForBuyingItemForPage(player, value, page);
+                ShopDisplayUtils.displayShopkeepersForBuyingItemForPage(player, value, page, instock);
                 break;
             case PLAYER:
                 ShopDisplayUtils.displayShopkeepersForPlayerForPage(player, value, page);

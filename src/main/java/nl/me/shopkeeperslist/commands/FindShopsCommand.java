@@ -42,9 +42,21 @@ public class FindShopsCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         if (args[0].equalsIgnoreCase("selling")) {
-            ShopDisplayUtils.displayShopkeepersForSellingItemForPage(commandSender, args[1], 1);
+            if (args.length > 2) {
+                if (args[2].equalsIgnoreCase("instock")) {
+                    ShopDisplayUtils.displayShopkeepersForSellingItemForPage(commandSender, args[1], 1, true);
+                    return true;
+                }
+            }
+            ShopDisplayUtils.displayShopkeepersForSellingItemForPage(commandSender, args[1], 1, false);
         } else if (args[0].equalsIgnoreCase("buying")) {
-            ShopDisplayUtils.displayShopkeepersForBuyingItemForPage(commandSender, args[1], 1);
+            if (args.length > 2) {
+                if (args[2].equalsIgnoreCase("instock")) {
+                    ShopDisplayUtils.displayShopkeepersForBuyingItemForPage(commandSender, args[1], 1, true);
+                    return true;
+                }
+            }
+            ShopDisplayUtils.displayShopkeepersForBuyingItemForPage(commandSender, args[1], 1, false);
         } else if (args[0].equalsIgnoreCase("player")) {
             ShopDisplayUtils.displayShopkeepersForPlayerForPage(commandSender, args[1], 1);
         } else {
@@ -90,7 +102,10 @@ public class FindShopsCommand implements CommandExecutor, TabCompleter {
                 }
             }
             return itemNames;
-        } else {
+        } else if (args.length == 3 && (args[0].equalsIgnoreCase("selling") || args[0].equalsIgnoreCase("buying"))) {
+            return List.of("inStock");
+        }
+        else {
             return Collections.emptyList();
         }
     }

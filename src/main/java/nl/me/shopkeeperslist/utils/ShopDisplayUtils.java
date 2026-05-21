@@ -40,7 +40,7 @@ public class ShopDisplayUtils {
             return;
         }
         Inventory gui = Bukkit.createInventory(
-                new ShopInventoryHolder(ShopGUIType.ALL, null, page),
+                new ShopInventoryHolder(ShopGUIType.ALL, null, page, false),
                 36,
                 "All shops"
         );
@@ -54,15 +54,15 @@ public class ShopDisplayUtils {
      * @param item The item to find shops selling.
      * @param page The page of the GUI to display.
      */
-    public static void displayShopkeepersForSellingItemForPage(CommandSender commandSender, String item, int page) {
-        List<Shopkeeper> shops = ShopFindingUtils.findShopsSelling(item);
+    public static void displayShopkeepersForSellingItemForPage(CommandSender commandSender, String item, int page, boolean instock) {
+        List<Shopkeeper> shops = ShopFindingUtils.findShopsSelling(item, instock);
         shops = removeDuplicateShopkeepers(shops);
         if (shops.isEmpty()) {
             MessageUtils.onNoShopsSellingItem(commandSender, item);
             return;
         }
         Inventory gui = Bukkit.createInventory(
-                new ShopInventoryHolder(ShopGUIType.SELLING_ITEM, item, page),
+                new ShopInventoryHolder(ShopGUIType.SELLING_ITEM, item, page, instock),
                 36,
                 "Shops selling " + item
         );
@@ -76,15 +76,15 @@ public class ShopDisplayUtils {
      * @param item The item to find shops buying.
      * @param page The page of the GUI to display.
      */
-    public static void displayShopkeepersForBuyingItemForPage(CommandSender commandSender, String item, int page) {
-        List<Shopkeeper> shops = ShopFindingUtils.findShopsBuying(item);
+    public static void displayShopkeepersForBuyingItemForPage(CommandSender commandSender, String item, int page, boolean instock) {
+        List<Shopkeeper> shops = ShopFindingUtils.findShopsBuying(item, instock);
         shops = removeDuplicateShopkeepers(shops);
         if (shops.isEmpty()) {
             MessageUtils.onNoShopsBuyingItem(commandSender, item);
             return;
         }
         Inventory gui = Bukkit.createInventory(
-                new ShopInventoryHolder(ShopGUIType.BUYING_ITEM, item, page),
+                new ShopInventoryHolder(ShopGUIType.BUYING_ITEM, item, page, instock),
                 36,
                 "Shops buying " + item
         );
@@ -106,7 +106,7 @@ public class ShopDisplayUtils {
             return;
         }
         Inventory gui = Bukkit.createInventory(
-                new ShopInventoryHolder(ShopGUIType.PLAYER, player, page),
+                new ShopInventoryHolder(ShopGUIType.PLAYER, player, page, false),
                 36,
                 "Shops for " + player
         );
@@ -127,6 +127,17 @@ public class ShopDisplayUtils {
             }
         }
         return uniqueShopkeepers;
+    }
+
+    /**
+     * Removes out of stock shops from the list
+     * @param shopkeepers the list of shopkeepers to remove out of stock items from
+     * @return
+     */
+    public static List<Shopkeeper> removeOutOfStockShopkeepers(List<Shopkeeper> shopkeepers) {
+        List<Shopkeeper> instockShopkeepers = new ArrayList<>();
+
+        return instockShopkeepers;
     }
 
     /**
