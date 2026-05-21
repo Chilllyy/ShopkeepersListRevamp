@@ -1,5 +1,5 @@
 name: ShopkeepersList
-version: '1.54'
+version: '${project.version}}'
 authors: [0nys, Chilly_Willy]
 main: nl.me.shopkeeperslist.ShopkeepersList
 api-version: '1.20'
